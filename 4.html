@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>
+        .container{
+            width: 638px;
+            height: 1134px;
+            background-image: url("4.jpg");
+            background-size: cover;
+        }
+        #canvas {
+            /*position:absolute;*/
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="canvas" width="580px" height="1270px"></canvas>
+    </div>
+    <script src="simpleheat.js"></script>
+    <script>
+        var data = [[104.0, 127.0, 1786.74], [253.0, 270.0, 1132.74], [242.0, 470.0, 653.18], [148.0, 646.0, 631.36], [134.0, 952.0, 946.63], [141.0, 998.0, 348.51], [410.0, 1000.0, 475.61], [556.0, 984.0, 235.75]];
+        var heat = simpleheat('canvas').data(data).max(1786.74);
+        heat.radius(30, 35);
+        heat.draw();
+
+
+function getClickPosition(e) {
+    // var parentPosition = getPosition(e.currentTarget);
+    var xPosition = e.layerX;// - parentPosition.x;
+    var yPosition = e.layerY;///2 - parentPosition.y;
+     
+    heat.add([xPosition, yPosition, 1]);
+    heat.draw();
+    console.info({
+        el: e,
+        "x": xPosition,
+        "y": yPosition
+    });
+};
+document.getElementById("canvas").addEventListener("click", getClickPosition, false);
+
+
+    </script>
+</body>
+</html>

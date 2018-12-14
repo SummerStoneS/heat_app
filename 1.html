@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <style>
+        .container{
+            width: 638px;
+            height: 1134px;
+            background-image: url("1.jpg");
+            background-size: cover;
+        }
+        #canvas {
+            /*position:absolute;*/
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="canvas" width="580px" height="1270px"></canvas>
+    </div>
+    <script src="simpleheat.js"></script>
+    <script>
+        var data = [[293.0, 739.0, 401.0137065665131], [400.0, 272.0, 553.5600828737823], [405.0, 164.0, 553.5430920249148], [54.0, 423.0, 479.1308456107875], [186.0, 431.0, 422.01389584783266], [318.0, 424.0, 353.77574082878385], [448.0, 438.0, 374.826867420726], [578.0, 446.0, 331.81322319874346], [62.0, 544.0, 404.54634170854746], [181.0, 550.0, 340.00714983474967], [322.0, 564.0, 371.31922307195055], [441.0, 548.0, 419.6848254494362], [572.0, 539.0, 434.5202920226576], [82.0, 888.0, 412.5408063832527], [577.0, 67.0, 426.0158715347715], [58.0, 75.0, 362.5423583196652], [158.0, 62.0, 393.64111886186924]];
+        var heat = simpleheat('canvas').data(data).max(553.5600828737823);
+        heat.radius(30, 35);
+        heat.draw();
+
+
+function getClickPosition(e) {
+    // var parentPosition = getPosition(e.currentTarget);
+    var xPosition = e.layerX;// - parentPosition.x;
+    var yPosition = e.layerY;///2 - parentPosition.y;
+     
+    heat.add([xPosition, yPosition, 1]);
+    heat.draw();
+    console.info({
+        el: e,
+        "x": xPosition,
+        "y": yPosition
+    });
+};
+document.getElementById("canvas").addEventListener("click", getClickPosition, false);
+
+
+    </script>
+</body>
+</html>
